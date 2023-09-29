@@ -1,0 +1,96 @@
+ClassDiagram{
+
+    class Game{
+    window
+    player : none
+    index_level : int
+    play : bool
+    scores : Scores
+    player_interface : PlayerInterface
+    musicPlaying : bool
+
+    __init__(self, window)
+    load_textures(self)
+    load_level(self)
+    start(self)
+    musicOnOff(self)
+    process_event(self, event)
+    update_screen(self)
+    has_win(self)
+    }
+
+//===========
+
+    class Level{
+    last_structure_stat : none
+
+    __init__(self, level_to_load)
+    load(self, level)
+    cancel_last_move(self, player, interface)
+    render(self, window, textures)
+    }
+
+//===========
+
+    class PlayerInterface{
+    player
+    level
+    mouse_pos : tuple
+    font_menu
+    txtLevel : str
+    colorTxtLevel
+    txtCancel : str
+    colorTxtCancel
+    txtReset : str
+    colorTxtReset
+
+    __init__(self, player, level)
+    click(self, pos_click, level, game)
+    setTxtColors(self)
+    render(self, window, level)
+    }
+
+//===========
+
+    class Player{
+    pos
+    direction
+
+    __init__(self, level)
+    move(self, direction, level, interface)
+    render(self, window, textures)
+    }
+
+//===========
+
+    class Scores{
+    game
+
+    __init__(self, game)
+    load(self)
+    save(self)
+    }
+
+//===========
+
+    class Menu{
+    image
+    new_game_txt : str
+    load_game_txt : str
+    quit_game_txt : str
+    font
+
+    __init__(self)
+    click(self, click_pos, window)
+    render(self, window)
+    }
+
+//===========
+
+    Scores -c->  Game
+    PlayerInterface -c-> Game
+    Level -c->  Game
+    Player -c->  Game
+    Game -c-> Menu
+    
+}
